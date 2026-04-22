@@ -14,6 +14,7 @@
             --spotify-green: #1DB954;
             --text-color: #ffffff;
             --matrix-color: #ffffff;
+            --border: #222222;
         }
 
         /* Variables Modo Claro */
@@ -23,15 +24,16 @@
             --text-color: #000000;
             --accent: #000000;
             --matrix-color: #000000;
+            --border: #dddddd;
         }
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Segoe UI', Roboto, sans-serif; overflow: hidden; background: #fff; }
         
-        /* --- INTERFAZ GOOGLE (Camuflaje V18.16) --- */
+        /* --- INTERFAZ GOOGLE --- */
         #google-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 100; display: flex; flex-direction: column; transition: opacity 0.8s; }
         #g-top { display: flex; justify-content: flex-end; padding: 15px 20px; align-items: center; gap: 15px; font-size: 13px; color: #5f6368; }
         #g-main { flex: 1; display: flex; flex-direction: column; align-items: center; padding-top: 15vh; }
-        #g-logo { width: 272px; margin-bottom: 30px; }
+        #g-logo { width: 272px; margin-bottom: 30px; cursor: pointer; }
 
         #search-box {
             width: 680px; height: 52px; border: 1px solid #dfe1e5; border-radius: 26px;
@@ -102,6 +104,32 @@
         .fav-star.active { color: #ffeb3b !important; }
         .fav-section { border-bottom: 1px solid #222; padding-bottom: 30px; margin-bottom: 30px; width: 92%; display: none; }
 
+        /* --- CHAT SIDEBAR SYSTEM --- */
+        #chat-sidebar {
+            position: fixed; right: -320px; top: 0; width: 300px; height: 100%;
+            background: var(--bg); border-left: 1px solid var(--border); z-index: 2100;
+            transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex; flex-direction: column; font-family: 'Courier New', monospace;
+        }
+        #chat-sidebar.open { right: 0; }
+        #chat-toggle {
+            position: absolute; left: -35px; top: 50%; transform: translateY(-50%);
+            background: var(--bg); color: var(--text-color); border: 1px solid var(--border); 
+            padding: 15px 5px; cursor: pointer; font-size: 11px; writing-mode: vertical-rl; 
+            text-orientation: mixed; border-right: none; letter-spacing: 2px;
+        }
+        #chat-auth { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 30px; gap: 10px; }
+        #chat-auth input { background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; font-family: inherit; font-size: 12px; outline: none; text-align: center; }
+        #chat-auth button { background: var(--accent); color: var(--bg); border: none; padding: 12px; font-weight: bold; cursor: pointer; font-family: inherit; }
+        #chat-main { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+        #chat-header { padding: 15px; font-size: 10px; color: #555; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+        #chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scrollbar-width: none; }
+        .msg { border-left: 1px solid var(--border); padding-left: 10px; animation: fadeIn 0.3s ease; }
+        .msg-u { color: #555; font-size: 9px; display: block; margin-bottom: 4px; text-transform: uppercase; }
+        .msg-t { color: var(--text-color); font-size: 12px; word-break: break-all; }
+        #chat-input-wrap { padding: 20px; border-top: 1px solid var(--border); background: var(--panel); }
+        #chat-input { width: 100%; background: transparent; border: none; color: var(--text-color); font-family: inherit; outline: none; font-size: 12px; }
+
         #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--bg); border-top: 1px solid #222; padding: 18px 0; z-index: 1100; }
         #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-color); letter-spacing: 1.5px; font-weight: bold; }
         .footer-part { flex: 1; }
@@ -160,6 +188,22 @@
             <div id="fav-container" class="fav-section"><div id="fav-grid"></div></div>
             <div id="main-grid"></div>
         </div>
+
+        <div id="chat-sidebar">
+            <div id="chat-toggle" onclick="toggleChat()">COMM_LINK</div>
+            <div id="chat-auth">
+                <div style="font-size:10px; color:#555; text-align:center; margin-bottom:5px;">AUTH_REQUIRED</div>
+                <input type="text" id="chat-user" placeholder="USER_ID">
+                <input type="password" id="chat-pass" placeholder="PASSWORD">
+                <button onclick="loginChat()">LOGIN</button>
+            </div>
+            <div id="chat-main">
+                <div id="chat-header"><span>FEED_INDEXUM</span><span onclick="logoutChat()" style="cursor:pointer">[EXIT]</span></div>
+                <div id="chat-messages"></div>
+                <div id="chat-input-wrap"><input type="text" id="chat-input" placeholder="SEND_DATA..." autocomplete="off"></div>
+            </div>
+        </div>
+
         <div id="ix-footer">
             <div id="ix-footer-content">
                 <div id="footer-left" class="footer-part">SISTEMAS: <span id="sys-count">0</span></div>
@@ -169,30 +213,80 @@
         </div>
     </div>
 
+    <script type="module">
+        // --- FIREBASE INTEGRATION ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, push, onChildAdded, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDHoFU5TiEq0LwsTUc04NifV57n1wDQAHg",
+            authDomain: "indexumchat.firebaseapp.com",
+            databaseURL: "https://indexumchat-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "indexumchat",
+            storageBucket: "indexumchat.firebasestorage.app",
+            messagingSenderId: "67069413036",
+            appId: "1:67069413036:web:4725c1f35ae027a9d04109"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // --- GLOBAL FUNCTIONS FOR MODULE ---
+        window.toggleChat = () => document.getElementById('chat-sidebar').classList.toggle('open');
+        
+        window.loginChat = () => {
+            const user = document.getElementById('chat-user').value.trim();
+            const pass = document.getElementById('chat-pass').value;
+            if(user.length >= 3 && pass.length >= 4) {
+                localStorage.setItem('ix_chat_user', user);
+                checkChatSession();
+            }
+        };
+
+        window.logoutChat = () => {
+            localStorage.removeItem('ix_chat_user');
+            location.reload();
+        };
+
+        function checkChatSession() {
+            const user = localStorage.getItem('ix_chat_user');
+            if(user) {
+                document.getElementById('chat-auth').style.display = 'none';
+                document.getElementById('chat-main').style.display = 'flex';
+                initChatLogic(user);
+            }
+        }
+
+        function initChatLogic(user) {
+            const input = document.getElementById('chat-input');
+            const box = document.getElementById('chat-messages');
+            input.onkeypress = (e) => {
+                if(e.key === 'Enter' && input.value.trim()) {
+                    push(ref(db, 'messages'), { u: user, t: input.value, s: serverTimestamp() });
+                    input.value = '';
+                }
+            };
+            onChildAdded(ref(db, 'messages'), (snap) => {
+                const d = snap.val();
+                const m = document.createElement('div'); m.className = 'msg';
+                m.innerHTML = `<span class="msg-u">${d.u}</span><span class="msg-t">${d.t}</span>`;
+                box.appendChild(m);
+                if(box.childNodes.length > 25) box.removeChild(box.firstChild);
+                box.scrollTop = box.scrollHeight;
+            });
+        }
+        checkChatSession();
+    </script>
+
     <script>
         function triggerEmergency() { window.location.href = "https://classroom.google.com/"; }
         window.addEventListener('keydown', (e) => { if (e.key === "Control") triggerEmergency(); });
 
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-        }
+        function toggleTheme() { document.body.classList.toggle('light-mode'); }
 
         function openSpotify() {
             const win = window.open('about:blank');
-            win.document.write(`
-                <html>
-                <head><title>Spotify Player</title></head>
-                <body style="margin:0; background:#000; display:flex; align-items:center; justify-content:center;">
-                    <div style="left: 0; width: 100%; height: 600px; position: relative;">
-                        <iframe src="https://open.spotify.com/embed/playlist/6hfxHDFSpmrx2EeA7JKwjv?utm_source=oembed"
-                                style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0; border-radius: 12px;"
-                                allowfullscreen
-                                allow="clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;">
-                        </iframe>
-                    </div>
-                </body>
-                </html>
-            `);
+            win.document.write(`<html><head><title>Spotify Player</title></head><body style="margin:0; background:#000; display:flex; align-items:center; justify-content:center;"><div style="left: 0; width: 100%; height: 600px; position: relative;"><iframe src="https://open.spotify.com/embed/playlist/6hfxHDFSpmrx2EeA7JKwjv?utm_source=oembed" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0; border-radius: 12px;" allowfullscreen allow="encrypted-media"></iframe></div></body></html>`);
         }
 
         const sInput = document.getElementById('search-input');
