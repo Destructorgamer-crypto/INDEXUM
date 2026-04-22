@@ -8,10 +8,19 @@
         :root {
             --accent: #ffffff;
             --bg: #000000;
+            --text: #ffffff;
             --panel: rgba(255, 255, 255, 0.05);
             --vpn: #ff4444;
             --emergency-red: #cc0000;
             --spotify-green: #1DB954;
+        }
+
+        /* MODO CLARO (Sobrescribe variables) */
+        body.light-mode {
+            --bg: #ffffff;
+            --text: #000000;
+            --panel: rgba(0, 0, 0, 0.05);
+            --accent: #000000;
         }
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Segoe UI', Roboto, sans-serif; overflow: hidden; background: #fff; }
@@ -50,16 +59,19 @@
         }
 
         /* --- INDEXUM KERNEL --- */
-        #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: #fff; font-family: 'Courier New', monospace; overflow-y: auto; }
+        #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: var(--text); font-family: 'Courier New', monospace; overflow-y: auto; }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
        
-        /* SPOTIFY SINGLE BUTTON (EMBED MODE) */
-        #spotify-top-wrap { position: fixed; top: 20px; right: 20px; z-index: 2000; }
-        .spotify-btn {
+        /* BOTONES SUPERIORES */
+        #top-controls { position: fixed; top: 20px; right: 20px; z-index: 2000; display: flex; gap: 10px; }
+        
+        .spotify-btn, .theme-btn {
             padding: 8px 20px; background: #111; color: #fff; border: 1px solid #333;
             font-size: 11px; cursor: pointer; letter-spacing: 1.5px; transition: all 0.3s; font-weight: bold; border-radius: 20px;
             text-decoration: none; display: inline-block;
         }
+        .theme-btn { background: #333; }
+        .theme-btn:hover { background: #eee; color: #000; }
         .spotify-btn:hover { background: var(--spotify-green); border-color: var(--spotify-green); color: #000; transform: scale(1.05); }
 
         /* BLOQUE DE EMERGENCIA */
@@ -73,28 +85,28 @@
 
         #ui-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 60px 0 140px 0; animation: fadeIn 1.2s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        #main-header { font-size: 80px; letter-spacing: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5); margin-bottom: 15px; }
-        #ix-search { width: 450px; background: var(--panel); border: 1px solid #333; color: #fff; padding: 15px; border-radius: 4px; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; }
-        #ix-vpn-link { color: #fff; font-size: 11px; text-decoration: none; margin-bottom: 50px; opacity: 0.6; letter-spacing: 1px; }
+        #main-header { font-size: 80px; letter-spacing: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5); margin-bottom: 15px; color: var(--text); }
+        #ix-search { width: 450px; background: var(--panel); border: 1px solid #333; color: var(--text); padding: 15px; border-radius: 4px; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; }
+        #ix-vpn-link { color: var(--text); font-size: 11px; text-decoration: none; margin-bottom: 50px; opacity: 0.6; letter-spacing: 1px; }
 
         #main-grid, #fav-grid { display: grid; width: 92%; max-width: 1400px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-        .game-btn { background: var(--panel); border: 1px solid #222; color: #fff; padding: 20px; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; flex-direction: column; border-radius: 2px; text-align: left; transition: all 0.3s ease; }
-        .game-btn:hover { background: #fff; color: #000; transform: translateY(-3px); border-color: #fff; }
+        .game-btn { background: var(--panel); border: 1px solid #222; color: var(--text); padding: 20px; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; flex-direction: column; border-radius: 2px; text-align: left; transition: all 0.3s ease; }
+        .game-btn:hover { background: var(--text); color: var(--bg); transform: translateY(-3px); border-color: var(--text); }
         .btn-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .vpn-tag { color: var(--vpn); font-size: 9px; margin-top: 8px; font-weight: 800; letter-spacing: 1px; }
         .fav-star { font-size: 18px; color: #444; }
         .fav-star.active { color: #ffeb3b !important; }
         .fav-section { border-bottom: 1px solid #222; padding-bottom: 30px; margin-bottom: 30px; width: 92%; display: none; }
 
-        #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.95); border-top: 1px solid #222; padding: 18px 0; z-index: 1100; }
-        #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #ffffff; letter-spacing: 1.5px; font-weight: bold; }
+        #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--bg); border-top: 1px solid #222; padding: 18px 0; z-index: 1100; opacity: 0.95; }
+        #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text); letter-spacing: 1.5px; font-weight: bold; }
         .footer-part { flex: 1; }
         #footer-left { text-align: left; }
         #footer-center { text-align: center; }
         #footer-right { text-align: right; }
     </style>
 </head>
-<body>
+<body class="dark-mode">
 
     <div id="google-page">
         <div id="g-top">
@@ -128,7 +140,8 @@
             <span id="emergency-hint">APRETA ''CTRL''</span>
         </div>
 
-        <div id="spotify-top-wrap">
+        <div id="top-controls">
+            <button class="theme-btn" onclick="toggleTheme()">MODO LUZ/OSCURO</button>
             <div class="spotify-btn" onclick="openSpotify()">SPOTIFY</div>
         </div>
        
@@ -152,6 +165,10 @@
     <script>
         function triggerEmergency() { window.location.href = "https://classroom.google.com/"; }
         window.addEventListener('keydown', (e) => { if (e.key === "Control") triggerEmergency(); });
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
 
         function openSpotify() {
             const win = window.open('about:blank');
@@ -267,7 +284,7 @@
             { n: "SCARY WHEELS", u: "https://azgames.io/scary-wheels.embed" },
             { n: "LEVEL DEVIL", u: "https://level-devil.io/" },
             { n: "MELON SANDBOX", u: "https://melonsandbox.com/", vpn: true },
-            { n: "DIALED.GG", u: "https://dialed.gg/" }
+            { n: "DIALED.GG", u: "http://bit.ly/4tVCci5" }
         ];
 
         function loadMenu(filter = "") {
