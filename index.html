@@ -12,17 +12,26 @@
             --vpn: #ff4444;
             --emergency-red: #cc0000;
             --spotify-green: #1DB954;
+            --text-color: #ffffff;
+            --matrix-color: #ffffff;
         }
 
+        /* Variables Modo Claro */
+        body.light-mode {
+            --bg: #f0f0f0;
+            --panel: rgba(0, 0, 0, 0.05);
+            --text-color: #1a1a1a;
+            --accent: #000000;
+            --matrix-color: #000000;
+        }
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Segoe UI', Roboto, sans-serif; overflow: hidden; background: #fff; }
-       
+        
         /* --- INTERFAZ GOOGLE (Camuflaje V18.16) --- */
         #google-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 100; display: flex; flex-direction: column; transition: opacity 0.8s; }
         #g-top { display: flex; justify-content: flex-end; padding: 15px 20px; align-items: center; gap: 15px; font-size: 13px; color: #5f6368; }
         #g-main { flex: 1; display: flex; flex-direction: column; align-items: center; padding-top: 15vh; }
         #g-logo { width: 272px; margin-bottom: 30px; }
-
 
         #search-box {
             width: 680px; height: 52px; border: 1px solid #dfe1e5; border-radius: 26px;
@@ -30,10 +39,9 @@
             margin-bottom: 25px; box-sizing: border-box; position: relative;
         }
         #search-box:hover { box-shadow: 0 1px 6px rgba(32,33,36,0.28); border-color: rgba(223,225,229,0); }
-       
+        
         #search-box > svg:first-of-type { width: 20px; height: 20px; margin-right: 12px; flex-shrink: 0; }
         #search-input { flex: 1; border: none; outline: none; font-size: 16px; padding-left: 0; background: transparent; }
-
 
         #photo-icons {
             display: flex; align-items: center; gap: 18px; flex-shrink: 0;
@@ -41,12 +49,10 @@
         }
         .g-icon-svg-tactical { height: 24px; width: 24px; cursor: pointer; display: block; }
 
-
         #g-shortcuts { display: flex; gap: 25px; margin-top: 5px; }
         .s-item { width: 88px; text-align: center; color: #3c4043; cursor: pointer; text-decoration: none; }
         .s-icon { width: 48px; height: 48px; background: #f1f3f4; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
         .s-text { font-size: 12px; }
-
 
         #personalize-btn {
             position: fixed; bottom: 16px; right: 16px; display: flex; align-items: center; gap: 8px;
@@ -54,11 +60,18 @@
             font-size: 14px; color: #747775; cursor: pointer; background: #fff;
         }
 
-
         /* --- INDEXUM KERNEL --- */
-        #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: #fff; font-family: 'Courier New', monospace; overflow-y: auto; }
+        #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: var(--text-color); font-family: 'Courier New', monospace; overflow-y: auto; }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
-       
+        
+        /* BOTÓN MODO CLARO/OSCURO */
+        #theme-toggle { position: fixed; top: 20px; right: 120px; z-index: 2000; }
+        .theme-btn {
+            padding: 8px 12px; background: #222; color: #fff; border: 1px solid #444;
+            font-size: 10px; cursor: pointer; border-radius: 20px; font-weight: bold;
+        }
+        body.light-mode .theme-btn { background: #ddd; color: #000; border-color: #ccc; }
+
         /* SPOTIFY SINGLE BUTTON (EMBED MODE) */
         #spotify-top-wrap { position: fixed; top: 20px; right: 20px; z-index: 2000; }
         .spotify-btn {
@@ -67,7 +80,6 @@
             text-decoration: none; display: inline-block;
         }
         .spotify-btn:hover { background: var(--spotify-green); border-color: var(--spotify-green); color: #000; transform: scale(1.05); }
-
 
         /* BLOQUE DE EMERGENCIA */
         #emergency-wrap { position: fixed; top: 20px; left: 20px; display: flex; align-items: center; gap: 10px; z-index: 2000; }
@@ -78,26 +90,23 @@
         #emergency-btn:hover { background: var(--emergency-red); border-color: var(--emergency-red); }
         #emergency-hint { font-size: 10px; color: #555; letter-spacing: 1px; }
 
-
         #ui-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 60px 0 140px 0; animation: fadeIn 1.2s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         #main-header { font-size: 80px; letter-spacing: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5); margin-bottom: 15px; }
-        #ix-search { width: 450px; background: var(--panel); border: 1px solid #333; color: #fff; padding: 15px; border-radius: 4px; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; }
-        #ix-vpn-link { color: #fff; font-size: 11px; text-decoration: none; margin-bottom: 50px; opacity: 0.6; letter-spacing: 1px; }
-
+        #ix-search { width: 450px; background: var(--panel); border: 1px solid #333; color: var(--text-color); padding: 15px; border-radius: 4px; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; }
+        #ix-vpn-link { color: var(--text-color); font-size: 11px; text-decoration: none; margin-bottom: 50px; opacity: 0.6; letter-spacing: 1px; }
 
         #main-grid, #fav-grid { display: grid; width: 92%; max-width: 1400px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-        .game-btn { background: var(--panel); border: 1px solid #222; color: #fff; padding: 20px; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; flex-direction: column; border-radius: 2px; text-align: left; transition: all 0.3s ease; }
-        .game-btn:hover { background: #fff; color: #000; transform: translateY(-3px); border-color: #fff; }
+        .game-btn { background: var(--panel); border: 1px solid #222; color: var(--text-color); padding: 20px; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; flex-direction: column; border-radius: 2px; text-align: left; transition: all 0.3s ease; }
+        .game-btn:hover { background: var(--accent); color: var(--bg); transform: translateY(-3px); border-color: var(--accent); }
         .btn-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .vpn-tag { color: var(--vpn); font-size: 9px; margin-top: 8px; font-weight: 800; letter-spacing: 1px; }
         .fav-star { font-size: 18px; color: #444; }
         .fav-star.active { color: #ffeb3b !important; }
         .fav-section { border-bottom: 1px solid #222; padding-bottom: 30px; margin-bottom: 30px; width: 92%; display: none; }
 
-
-        #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.95); border-top: 1px solid #222; padding: 18px 0; z-index: 1100; }
-        #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #ffffff; letter-spacing: 1.5px; font-weight: bold; }
+        #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--bg); border-top: 1px solid #222; padding: 18px 0; z-index: 1100; }
+        #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-color); letter-spacing: 1.5px; font-weight: bold; }
         .footer-part { flex: 1; }
         #footer-left { text-align: left; }
         #footer-center { text-align: center; }
@@ -106,10 +115,9 @@
 </head>
 <body>
 
-
     <div id="google-page">
         <div id="g-top">
-            Gmail   Imágenes  
+            Gmail Imágenes 
             <svg width="32" height="32" viewBox="0 0 24 24" style="border-radius:50%; margin-left: 5px; background: #f1f3f4; padding: 4px;">
                 <path fill="#5f6368" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
@@ -133,18 +141,20 @@
         <div id="personalize-btn"><svg width="20" height="20" viewBox="0 0 24 24" style="margin-right:8px;"><path fill="#747775" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> Personalizar Chrome</div>
     </div>
 
-
     <div id="indexum-kernel">
         <div id="emergency-wrap">
             <button id="emergency-btn" onclick="triggerEmergency()">EMERGENCIA</button>
             <span id="emergency-hint">APRETA ''CTRL''</span>
         </div>
 
+        <div id="theme-toggle">
+            <button class="theme-btn" onclick="toggleTheme()">MODO L/O</button>
+        </div>
 
         <div id="spotify-top-wrap">
             <div class="spotify-btn" onclick="openSpotify()">SPOTIFY</div>
         </div>
-       
+        
         <canvas id="bin-canvas"></canvas>
         <div id="ui-wrap">
             <h1 id="main-header">INDEXUM</h1>
@@ -162,11 +172,13 @@
         </div>
     </div>
 
-
     <script>
         function triggerEmergency() { window.location.href = "https://classroom.google.com/"; }
         window.addEventListener('keydown', (e) => { if (e.key === "Control") triggerEmergency(); });
 
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
 
         function openSpotify() {
             const win = window.open('about:blank');
@@ -186,7 +198,6 @@
             `);
         }
 
-
         const sInput = document.getElementById('search-input');
         sInput.onkeyup = (e) => {
             if (e.keyCode === 13 && sInput.value.toUpperCase() === "INDEXUM") {
@@ -195,7 +206,6 @@
                 initMatrix(); initFooter(); loadMenu();
             }
         };
-
 
         let favorites = JSON.parse(localStorage.getItem('ix_favs')) || [];
         const GAMES = [
@@ -286,7 +296,6 @@
             { n: "MELON SANDBOX", u: "https://melonsandbox.com/", vpn: true }
         ];
 
-
         function loadMenu(filter = "") {
             const mGrid = document.getElementById('main-grid'); const fGrid = document.getElementById('fav-grid');
             mGrid.innerHTML = ""; fGrid.innerHTML = "";
@@ -297,7 +306,6 @@
             else { document.getElementById('fav-container').style.display = "none"; }
             filtered.forEach((g, i) => mGrid.appendChild(createCard(g, i)));
         }
-
 
         function createCard(g, i) {
             const card = document.createElement('div'); card.className = 'game-btn'; card.style.animationDelay = `${i * 0.03}s`;
@@ -310,7 +318,6 @@
             return card;
         }
 
-
         function toggleFav(n, e) { e.stopPropagation(); favorites.includes(n) ? favorites = favorites.filter(f => f !== n) : favorites.push(n); localStorage.setItem('ix_favs', JSON.stringify(favorites)); loadMenu(document.getElementById('ix-search').value); }
         function initFooter() { setInterval(() => { document.getElementById('footer-center').innerText = new Date().toLocaleTimeString(); }, 1000); }
         function initMatrix() {
@@ -319,8 +326,10 @@
             const drops = Array(Math.floor(c.width / 20)).fill(1);
             ctx.font = "14px Courier New";
             setInterval(() => {
-                ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,c.width,c.height);
-                ctx.fillStyle = "#fff"; drops.forEach((y, i) => {
+                ctx.fillStyle = document.body.classList.contains('light-mode') ? "rgba(240,240,240,0.05)" : "rgba(0,0,0,0.05)"; 
+                ctx.fillRect(0,0,c.width,c.height);
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--matrix-color');
+                drops.forEach((y, i) => {
                     ctx.fillText(Math.floor(Math.random()*2), i*20, y*14);
                     if(y*14 > c.height && Math.random() > 0.975) drops[i] = 0; drops[i]++;
                 });
@@ -329,5 +338,3 @@
     </script>
 </body>
 </html>
-
-
