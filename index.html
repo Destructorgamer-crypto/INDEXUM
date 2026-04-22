@@ -18,11 +18,11 @@
 
         /* Variables Modo Claro */
         body.light-mode {
-            --bg: #f0f0f0;
+            --bg: #ffffff; /* Cambio 3: Full Blanco */
             --panel: rgba(0, 0, 0, 0.05);
-            --text-color: #1a1a1a;
+            --text-color: #000000;
             --accent: #000000;
-            --matrix-color: #000000;
+            --matrix-color: #000000; /* Cambio 2: Lluvia Full Negro */
         }
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Segoe UI', Roboto, sans-serif; overflow: hidden; background: #fff; }
@@ -64,15 +64,13 @@
         #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: var(--text-color); font-family: 'Courier New', monospace; overflow-y: auto; }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
         
-        /* BOTÓN MODO CLARO/OSCURO */
         #theme-toggle { position: fixed; top: 20px; right: 120px; z-index: 2000; }
         .theme-btn {
             padding: 8px 12px; background: #222; color: #fff; border: 1px solid #444;
             font-size: 10px; cursor: pointer; border-radius: 20px; font-weight: bold;
         }
-        body.light-mode .theme-btn { background: #ddd; color: #000; border-color: #ccc; }
+        body.light-mode .theme-btn { background: #eee; color: #000; border-color: #ccc; }
 
-        /* SPOTIFY SINGLE BUTTON (EMBED MODE) */
         #spotify-top-wrap { position: fixed; top: 20px; right: 20px; z-index: 2000; }
         .spotify-btn {
             padding: 8px 20px; background: #111; color: #fff; border: 1px solid #333;
@@ -81,7 +79,6 @@
         }
         .spotify-btn:hover { background: var(--spotify-green); border-color: var(--spotify-green); color: #000; transform: scale(1.05); }
 
-        /* BLOQUE DE EMERGENCIA */
         #emergency-wrap { position: fixed; top: 20px; left: 20px; display: flex; align-items: center; gap: 10px; z-index: 2000; }
         #emergency-btn {
             padding: 10px 15px; background: #222; color: #fff; border: 1px solid #444;
@@ -293,7 +290,9 @@
             { n: "RETRO BLASTER", u: "https://azgames.io/retro-blaster.embed" },
             { n: "SCARY WHEELS", u: "https://azgames.io/scary-wheels.embed" },
             { n: "LEVEL DEVIL", u: "https://level-devil.io/" },
-            { n: "MELON SANDBOX", u: "https://melonsandbox.com/", vpn: true }
+            { n: "MELON SANDBOX", u: "https://melonsandbox.com/", vpn: true },
+            /* Cambio 1: DIALED.GG AÑADIDO */
+            { n: "DIALED.GG", u: "https://dialed.gg/", vpn: true }
         ];
 
         function loadMenu(filter = "") {
@@ -326,9 +325,9 @@
             const drops = Array(Math.floor(c.width / 20)).fill(1);
             ctx.font = "14px Courier New";
             setInterval(() => {
-                ctx.fillStyle = document.body.classList.contains('light-mode') ? "rgba(240,240,240,0.05)" : "rgba(0,0,0,0.05)"; 
+                ctx.fillStyle = document.body.classList.contains('light-mode') ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"; 
                 ctx.fillRect(0,0,c.width,c.height);
-                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--matrix-color');
+                ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--matrix-color');
                 drops.forEach((y, i) => {
                     ctx.fillText(Math.floor(Math.random()*2), i*20, y*14);
                     if(y*14 > c.height && Math.random() > 0.975) drops[i] = 0; drops[i]++;
