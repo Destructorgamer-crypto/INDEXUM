@@ -9,28 +9,32 @@
             --accent: #ffffff;
             --bg: #000000;
             --text: #ffffff;
-            --panel: rgba(255, 255, 255, 0.05);
+            /* Panel sutil para modo oscuro */
+            --panel: rgba(255, 255, 255, 0.05); 
             --vpn: #ff4444;
             --emergency-red: #cc0000;
             --spotify-green: #1DB954;
+            --border: #222;
         }
 
-        /* MODO CLARO (Blanco total y animación) */
+        /* MODO CLARO (Inversión Total Pura y animación) */
         body.light-mode {
             --bg: #ffffff;
             --text: #000000;
-            --panel: rgba(0, 0, 0, 0.05);
+            /* Panel se vuelve blanco puro para no verse */
+            --panel: #ffffff; 
             --accent: #000000;
+            /* Bordes negros puros */
+            --border: #000000; 
         }
 
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
             font-family: 'Segoe UI', Roboto, sans-serif; 
             overflow: hidden; background: #fff; 
-            transition: background-color 0.5s ease, color 0.5s ease; 
         }
        
-        /* --- INTERFAZ GOOGLE (Camuflaje V18.16) --- */
+        /* --- INTERFAZ GOOGLE (Camuflaje V18.16) - NO AFECTADA POR MODO LUZ --- */
         #google-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 100; display: flex; flex-direction: column; transition: opacity 0.8s; }
         #g-top { display: flex; justify-content: flex-end; padding: 15px 20px; align-items: center; gap: 15px; font-size: 13px; color: #5f6368; }
         #g-main { flex: 1; display: flex; flex-direction: column; align-items: center; padding-top: 15vh; }
@@ -68,7 +72,8 @@
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: var(--bg); z-index: 1000; color: var(--text); 
             font-family: 'Courier New', monospace; overflow-y: auto; 
-            transition: background-color 0.5s ease; 
+            /* Animación suave solo aquí */
+            transition: background-color 0.5s ease, color 0.5s ease; 
         }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
        
@@ -80,8 +85,13 @@
             font-size: 11px; cursor: pointer; letter-spacing: 1.5px; transition: all 0.3s; font-weight: bold; border-radius: 20px;
             text-decoration: none; display: inline-block;
         }
+        /* Ajuste botones modo luz */
+        body.light-mode .spotify-btn, body.light-mode .theme-btn { background: #fff; color: #000; border-color: #000; }
+
         .theme-btn { background: #333; }
         .theme-btn:hover { background: #eee; color: #000; }
+        body.light-mode .theme-btn:hover { background: #000; color: #fff; }
+
         .spotify-btn:hover { background: var(--spotify-green); border-color: var(--spotify-green); color: #000; transform: scale(1.05); }
 
         /* BLOQUE DE EMERGENCIA */
@@ -96,19 +106,25 @@
         #ui-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 60px 0 140px 0; animation: fadeIn 1.2s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         #main-header { font-size: 80px; letter-spacing: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5); margin-bottom: 15px; color: var(--text); transition: color 0.5s ease; }
-        #ix-search { width: 450px; background: var(--panel); border: 1px solid #333; color: var(--text); padding: 15px; border-radius: 4px; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; transition: all 0.5s ease; }
+        body.light-mode #main-header { text-shadow: none; }
+
+        #ix-search { width: 450px; background: var(--panel); border: 1px solid var(--border); color: var(--text); padding: 15px; border-radius: 4px; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; transition: all 0.5s ease; }
         #ix-vpn-link { color: var(--text); font-size: 11px; text-decoration: none; margin-bottom: 50px; opacity: 0.6; letter-spacing: 1px; transition: color 0.5s ease; }
 
         #main-grid, #fav-grid { display: grid; width: 92%; max-width: 1400px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-        .game-btn { background: var(--panel); border: 1px solid #222; color: var(--text); padding: 20px; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; flex-direction: column; border-radius: 2px; text-align: left; transition: all 0.3s ease; }
+        .game-btn { background: var(--panel); border: 1px solid var(--border); color: var(--text); padding: 20px; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; flex-direction: column; border-radius: 2px; text-align: left; transition: all 0.3s ease; }
+        
+        /* Hover invertido puro */
         .game-btn:hover { background: var(--text); color: var(--bg); transform: translateY(-3px); border-color: var(--text); }
+        
         .btn-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .vpn-tag { color: var(--vpn); font-size: 9px; margin-top: 8px; font-weight: 800; letter-spacing: 1px; }
-        .fav-star { font-size: 18px; color: #444; }
+        .fav-star { font-size: 18px; color: #444; transition: color 0.5s ease; }
+        body.light-mode .fav-star { color: #ccc; }
         .fav-star.active { color: #ffeb3b !important; }
-        .fav-section { border-bottom: 1px solid #222; padding-bottom: 30px; margin-bottom: 30px; width: 92%; display: none; }
+        .fav-section { border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 30px; width: 92%; display: none; transition: border-color 0.5s ease; }
 
-        #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--bg); border-top: 1px solid #222; padding: 18px 0; z-index: 1100; opacity: 0.95; transition: background-color 0.5s ease; }
+        #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--bg); border-top: 1px solid var(--border); padding: 18px 0; z-index: 1100; opacity: 0.95; transition: background-color 0.5s ease, border-color 0.5s ease; }
         #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text); letter-spacing: 1.5px; font-weight: bold; transition: color 0.5s ease; }
         .footer-part { flex: 1; }
         #footer-left { text-align: left; }
