@@ -8,37 +8,21 @@
         :root {
             --accent: #ffffff;
             --bg: #000000;
-            --text: #ffffff;
-            /* Panel sutil para modo oscuro */
-            --panel: rgba(255, 255, 255, 0.05); 
+            --panel: rgba(255, 255, 255, 0.05);
             --vpn: #ff4444;
             --emergency-red: #cc0000;
             --spotify-green: #1DB954;
-            --border: #222;
         }
 
-        /* MODO CLARO (Inversión Total Pura y animación) */
-        body.light-mode {
-            --bg: #ffffff;
-            --text: #000000;
-            /* Panel se vuelve blanco puro para no verse */
-            --panel: #ffffff; 
-            --accent: #000000;
-            /* Bordes negros puros */
-            --border: #000000; 
-        }
 
-        body, html { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            font-family: 'Segoe UI', Roboto, sans-serif; 
-            overflow: hidden; background: #fff; 
-        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Segoe UI', Roboto, sans-serif; overflow: hidden; background: #fff; }
        
-        /* --- INTERFAZ GOOGLE (Camuflaje V18.16) - NO AFECTADA POR MODO LUZ --- */
+        /* --- INTERFAZ GOOGLE (Camuflaje V18.16) --- */
         #google-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 100; display: flex; flex-direction: column; transition: opacity 0.8s; }
         #g-top { display: flex; justify-content: flex-end; padding: 15px 20px; align-items: center; gap: 15px; font-size: 13px; color: #5f6368; }
         #g-main { flex: 1; display: flex; flex-direction: column; align-items: center; padding-top: 15vh; }
         #g-logo { width: 272px; margin-bottom: 30px; }
+
 
         #search-box {
             width: 680px; height: 52px; border: 1px solid #dfe1e5; border-radius: 26px;
@@ -50,16 +34,19 @@
         #search-box > svg:first-of-type { width: 20px; height: 20px; margin-right: 12px; flex-shrink: 0; }
         #search-input { flex: 1; border: none; outline: none; font-size: 16px; padding-left: 0; background: transparent; }
 
+
         #photo-icons {
             display: flex; align-items: center; gap: 18px; flex-shrink: 0;
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
         }
         .g-icon-svg-tactical { height: 24px; width: 24px; cursor: pointer; display: block; }
 
+
         #g-shortcuts { display: flex; gap: 25px; margin-top: 5px; }
         .s-item { width: 88px; text-align: center; color: #3c4043; cursor: pointer; text-decoration: none; }
         .s-icon { width: 48px; height: 48px; background: #f1f3f4; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
         .s-text { font-size: 12px; }
+
 
         #personalize-btn {
             position: fixed; bottom: 16px; right: 16px; display: flex; align-items: center; gap: 8px;
@@ -67,32 +54,20 @@
             font-size: 14px; color: #747775; cursor: pointer; background: #fff;
         }
 
+
         /* --- INDEXUM KERNEL --- */
-        #indexum-kernel { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: var(--bg); z-index: 1000; color: var(--text); 
-            font-family: 'Courier New', monospace; overflow-y: auto; 
-            /* Animación suave solo aquí */
-            transition: background-color 0.5s ease, color 0.5s ease; 
-        }
+        #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: #fff; font-family: 'Courier New', monospace; overflow-y: auto; }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
        
-        /* BOTONES SUPERIORES */
-        #top-controls { position: fixed; top: 20px; right: 20px; z-index: 2000; display: flex; gap: 10px; }
-        
-        .spotify-btn, .theme-btn {
+        /* SPOTIFY SINGLE BUTTON (EMBED MODE) */
+        #spotify-top-wrap { position: fixed; top: 20px; right: 20px; z-index: 2000; }
+        .spotify-btn {
             padding: 8px 20px; background: #111; color: #fff; border: 1px solid #333;
             font-size: 11px; cursor: pointer; letter-spacing: 1.5px; transition: all 0.3s; font-weight: bold; border-radius: 20px;
             text-decoration: none; display: inline-block;
         }
-        /* Ajuste botones modo luz */
-        body.light-mode .spotify-btn, body.light-mode .theme-btn { background: #fff; color: #000; border-color: #000; }
-
-        .theme-btn { background: #333; }
-        .theme-btn:hover { background: #eee; color: #000; }
-        body.light-mode .theme-btn:hover { background: #000; color: #fff; }
-
         .spotify-btn:hover { background: var(--spotify-green); border-color: var(--spotify-green); color: #000; transform: scale(1.05); }
+
 
         /* BLOQUE DE EMERGENCIA */
         #emergency-wrap { position: fixed; top: 20px; left: 20px; display: flex; align-items: center; gap: 10px; z-index: 2000; }
@@ -103,40 +78,38 @@
         #emergency-btn:hover { background: var(--emergency-red); border-color: var(--emergency-red); }
         #emergency-hint { font-size: 10px; color: #555; letter-spacing: 1px; }
 
+
         #ui-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 60px 0 140px 0; animation: fadeIn 1.2s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        #main-header { font-size: 80px; letter-spacing: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5); margin-bottom: 15px; color: var(--text); transition: color 0.5s ease; }
-        body.light-mode #main-header { text-shadow: none; }
+        #main-header { font-size: 80px; letter-spacing: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5); margin-bottom: 15px; }
+        #ix-search { width: 450px; background: var(--panel); border: 1px solid #333; color: #fff; padding: 15px; border-radius: 4px; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; }
+        #ix-vpn-link { color: #fff; font-size: 11px; text-decoration: none; margin-bottom: 50px; opacity: 0.6; letter-spacing: 1px; }
 
-        #ix-search { width: 450px; background: var(--panel); border: 1px solid var(--border); color: var(--text); padding: 15px; border-radius: 4px; outline: none; margin-bottom: 12px; text-align: center; font-size: 14px; transition: all 0.5s ease; }
-        #ix-vpn-link { color: var(--text); font-size: 11px; text-decoration: none; margin-bottom: 50px; opacity: 0.6; letter-spacing: 1px; transition: color 0.5s ease; }
 
         #main-grid, #fav-grid { display: grid; width: 92%; max-width: 1400px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-        .game-btn { background: var(--panel); border: 1px solid var(--border); color: var(--text); padding: 20px; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; flex-direction: column; border-radius: 2px; text-align: left; transition: all 0.3s ease; }
-        
-        /* Hover invertido puro */
-        .game-btn:hover { background: var(--text); color: var(--bg); transform: translateY(-3px); border-color: var(--text); }
-        
+        .game-btn { background: var(--panel); border: 1px solid #222; color: #fff; padding: 20px; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; flex-direction: column; border-radius: 2px; text-align: left; transition: all 0.3s ease; }
+        .game-btn:hover { background: #fff; color: #000; transform: translateY(-3px); border-color: #fff; }
         .btn-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .vpn-tag { color: var(--vpn); font-size: 9px; margin-top: 8px; font-weight: 800; letter-spacing: 1px; }
-        .fav-star { font-size: 18px; color: #444; transition: color 0.5s ease; }
-        body.light-mode .fav-star { color: #ccc; }
+        .fav-star { font-size: 18px; color: #444; }
         .fav-star.active { color: #ffeb3b !important; }
-        .fav-section { border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 30px; width: 92%; display: none; transition: border-color 0.5s ease; }
+        .fav-section { border-bottom: 1px solid #222; padding-bottom: 30px; margin-bottom: 30px; width: 92%; display: none; }
 
-        #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--bg); border-top: 1px solid var(--border); padding: 18px 0; z-index: 1100; opacity: 0.95; transition: background-color 0.5s ease, border-color 0.5s ease; }
-        #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text); letter-spacing: 1.5px; font-weight: bold; transition: color 0.5s ease; }
+
+        #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.95); border-top: 1px solid #222; padding: 18px 0; z-index: 1100; }
+        #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #ffffff; letter-spacing: 1.5px; font-weight: bold; }
         .footer-part { flex: 1; }
         #footer-left { text-align: left; }
         #footer-center { text-align: center; }
         #footer-right { text-align: right; }
     </style>
 </head>
-<body class="dark-mode">
+<body>
+
 
     <div id="google-page">
         <div id="g-top">
-            Gmail   Imágenes  
+            Gmail   Imágenes  
             <svg width="32" height="32" viewBox="0 0 24 24" style="border-radius:50%; margin-left: 5px; background: #f1f3f4; padding: 4px;">
                 <path fill="#5f6368" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
@@ -160,14 +133,15 @@
         <div id="personalize-btn"><svg width="20" height="20" viewBox="0 0 24 24" style="margin-right:8px;"><path fill="#747775" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> Personalizar Chrome</div>
     </div>
 
+
     <div id="indexum-kernel">
         <div id="emergency-wrap">
             <button id="emergency-btn" onclick="triggerEmergency()">EMERGENCIA</button>
             <span id="emergency-hint">APRETA ''CTRL''</span>
         </div>
 
-        <div id="top-controls">
-            <button class="theme-btn" onclick="toggleTheme()">MODO LUZ/OSCURO</button>
+
+        <div id="spotify-top-wrap">
             <div class="spotify-btn" onclick="openSpotify()">SPOTIFY</div>
         </div>
        
@@ -188,13 +162,11 @@
         </div>
     </div>
 
+
     <script>
         function triggerEmergency() { window.location.href = "https://classroom.google.com/"; }
         window.addEventListener('keydown', (e) => { if (e.key === "Control") triggerEmergency(); });
 
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-        }
 
         function openSpotify() {
             const win = window.open('about:blank');
@@ -203,9 +175,9 @@
                 <head><title>Spotify Player</title></head>
                 <body style="margin:0; background:#000; display:flex; align-items:center; justify-content:center;">
                     <div style="left: 0; width: 100%; height: 600px; position: relative;">
-                        <iframe src="https://open.spotify.com/embed/playlist/6hfxHDFSpmrx2EeA7JKwjv?utm_source=oembed" 
-                                style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0; border-radius: 12px;" 
-                                allowfullscreen 
+                        <iframe src="https://open.spotify.com/embed/playlist/6hfxHDFSpmrx2EeA7JKwjv?utm_source=oembed"
+                                style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0; border-radius: 12px;"
+                                allowfullscreen
                                 allow="clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;">
                         </iframe>
                     </div>
@@ -214,14 +186,16 @@
             `);
         }
 
+
         const sInput = document.getElementById('search-input');
-        sInput.onkeyup = (e) => { 
+        sInput.onkeyup = (e) => {
             if (e.keyCode === 13 && sInput.value.toUpperCase() === "INDEXUM") {
                 document.getElementById('google-page').style.display = 'none';
                 document.getElementById('indexum-kernel').style.display = 'block';
                 initMatrix(); initFooter(); loadMenu();
             }
         };
+
 
         let favorites = JSON.parse(localStorage.getItem('ix_favs')) || [];
         const GAMES = [
@@ -309,9 +283,9 @@
             { n: "RETRO BLASTER", u: "https://azgames.io/retro-blaster.embed" },
             { n: "SCARY WHEELS", u: "https://azgames.io/scary-wheels.embed" },
             { n: "LEVEL DEVIL", u: "https://level-devil.io/" },
-            { n: "MELON SANDBOX", u: "https://melonsandbox.com/", vpn: true },
-            { n: "DIALED.GG", u: "http://bit.ly/4tVCci5" }
+            { n: "MELON SANDBOX", u: "https://melonsandbox.com/", vpn: true }
         ];
+
 
         function loadMenu(filter = "") {
             const mGrid = document.getElementById('main-grid'); const fGrid = document.getElementById('fav-grid');
@@ -324,6 +298,7 @@
             filtered.forEach((g, i) => mGrid.appendChild(createCard(g, i)));
         }
 
+
         function createCard(g, i) {
             const card = document.createElement('div'); card.className = 'game-btn'; card.style.animationDelay = `${i * 0.03}s`;
             card.innerHTML = `<div class="btn-top"><span>${g.n}</span><span class="fav-star ${favorites.includes(g.n)?'active':''}" onclick="toggleFav('${g.n}', event)">★</span></div>${g.vpn ? '<div class="vpn-tag">VPN</div>' : ''}`;
@@ -334,6 +309,7 @@
             };
             return card;
         }
+
 
         function toggleFav(n, e) { e.stopPropagation(); favorites.includes(n) ? favorites = favorites.filter(f => f !== n) : favorites.push(n); localStorage.setItem('ix_favs', JSON.stringify(favorites)); loadMenu(document.getElementById('ix-search').value); }
         function initFooter() { setInterval(() => { document.getElementById('footer-center').innerText = new Date().toLocaleTimeString(); }, 1000); }
@@ -353,3 +329,5 @@
     </script>
 </body>
 </html>
+
+
