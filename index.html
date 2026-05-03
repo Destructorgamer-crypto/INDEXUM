@@ -14,10 +14,9 @@
             --spotify-green: #1DB954;
             --text-color: #ffffff;
             --matrix-color: #ffffff;
-            --border-color: #444; /* Color de borde para botones top */
+            --border-color: #444;
         }
 
-        /* Variables Modo Claro */
         body.light-mode {
             --bg: #ffffff;
             --panel: rgba(0, 0, 0, 0.05);
@@ -29,7 +28,6 @@
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Segoe UI', Roboto, sans-serif; overflow: hidden; background: #fff; }
         
-        /* --- INTERFAZ GOOGLE --- */
         #google-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 100; display: flex; flex-direction: column; transition: opacity 0.8s; }
         #g-top { display: flex; justify-content: flex-end; padding: 15px 20px; align-items: center; gap: 15px; font-size: 13px; color: #5f6368; }
         #g-main { flex: 1; display: flex; flex-direction: column; align-items: center; padding-top: 15vh; }
@@ -41,8 +39,6 @@
             margin-bottom: 25px; box-sizing: border-box; position: relative;
         }
         #search-box:hover { box-shadow: 0 1px 6px rgba(32,33,36,0.28); border-color: rgba(223,225,229,0); }
-        
-        #search-box > svg:first-of-type { width: 20px; height: 20px; margin-right: 12px; flex-shrink: 0; }
         #search-input { flex: 1; border: none; outline: none; font-size: 16px; padding-left: 0; background: transparent; }
 
         #photo-icons {
@@ -62,13 +58,10 @@
             font-size: 14px; color: #747775; cursor: pointer; background: #fff;
         }
 
-        /* --- INDEXUM KERNEL --- */
         #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: var(--text-color); font-family: 'Courier New', monospace; overflow-y: auto; }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
         
-        /* Top Buttons Area */
         #top-buttons-container { position: fixed; top: 20px; left: 20px; display: flex; align-items: center; gap: 10px; z-index: 2000; }
-        
         .top-btn {
             padding: 10px 15px; background: #222; color: #fff; border: 1px solid var(--border-color);
             font-size: 11px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; font-weight: bold;
@@ -111,7 +104,6 @@
         .fav-star.active { color: #ffeb3b !important; }
         .fav-section { border-bottom: 1px solid #222; padding-bottom: 30px; margin-bottom: 30px; width: 92%; display: none; }
 
-        /* --- CHAT SIDEBAR SYSTEM --- */
         #chat-sidebar {
             position: fixed; right: -320px; top: 0; width: 300px; height: 100%;
             background: var(--bg); border-left: 1px solid #333; z-index: 3000;
@@ -122,13 +114,11 @@
         
         #chat-auth { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 30px; gap: 10px; }
         #chat-auth input { background: #000; border: 1px solid #333; color: #fff; padding: 12px; font-family: inherit; font-size: 12px; outline: none; text-align: center; }
-        #chat-auth input::placeholder { color: #555; }
         #chat-auth button { background: var(--accent); color: var(--bg); border: none; padding: 12px; font-weight: bold; cursor: pointer; font-family: inherit; letter-spacing: 1px; }
         
         #chat-main { flex: 1; display: none; flex-direction: column; overflow: hidden; }
         #chat-header { padding: 15px; font-size: 10px; color: #555; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
         #chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scrollbar-width: none; }
-        #chat-messages::-webkit-scrollbar { display: none; }
         
         .msg { border-left: 1px solid #333; padding-left: 10px; animation: fadeIn 0.3s ease; }
         .msg-u { color: #555; font-size: 9px; display: block; margin-bottom: 4px; text-transform: uppercase; }
@@ -140,9 +130,6 @@
         #ix-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--bg); border-top: 1px solid #222; padding: 18px 0; z-index: 1100; }
         #ix-footer-content { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-color); letter-spacing: 1.5px; font-weight: bold; }
         .footer-part { flex: 1; }
-        #footer-left { text-align: left; }
-        #footer-center { text-align: center; }
-        #footer-right { text-align: right; }
     </style>
 </head>
 <body>
@@ -170,7 +157,7 @@
                 <div class="s-item"><div class="s-icon" style="font-size: 24px; color: #5f6368;">+</div><div class="s-text">Añadir acceso</div></div>
             </div>
         </div>
-        <div id="personalize-btn"><svg width="20" height="20" viewBox="0 0 24 24" style="margin-right:8px;"><path fill="#747775" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> Personalizar Chrome</div>
+        <div id="personalize-btn">Personalizar Chrome</div>
     </div>
 
     <div id="indexum-kernel">
@@ -179,15 +166,8 @@
             <button id="chat-open-btn" class="top-btn" onclick="toggleChat()">CHAT</button>
             <span id="emergency-hint">APRETA ''CTRL''</span>
         </div>
-
-        <div id="theme-toggle">
-            <button class="theme-btn" onclick="toggleTheme()">MODO L/O</button>
-        </div>
-
-        <div id="spotify-top-wrap">
-            <div class="spotify-btn" onclick="openSpotify()">SPOTIFY</div>
-        </div>
-        
+        <div id="theme-toggle"><button class="theme-btn" onclick="toggleTheme()">MODO L/O</button></div>
+        <div id="spotify-top-wrap"><div class="spotify-btn" onclick="openSpotify()">SPOTIFY</div></div>
         <canvas id="bin-canvas"></canvas>
         <div id="ui-wrap">
             <h1 id="main-header">INDEXUM</h1>
@@ -199,28 +179,22 @@
 
         <div id="chat-sidebar">
             <div id="chat-auth">
-                <div style="font-size:10px; color:#555; text-align:center; margin-bottom:10px; letter-spacing:1px;">AUTH_REQUIRED</div>
-                <input type="text" id="chat-user" placeholder="USER_ID" autocomplete="off">
+                <input type="text" id="chat-user" placeholder="USER_ID">
                 <input type="password" id="chat-pass" placeholder="PASSWORD">
                 <button onclick="loginChat()">CONNECT</button>
             </div>
             <div id="chat-main">
-                <div id="chat-header">
-                    <span>COMM_LINK_ACTIVE</span>
-                    <span onclick="logoutChat()" style="cursor:pointer; color:var(--accent);">[EXIT]</span>
-                </div>
+                <div id="chat-header"><span>COMM_LINK_ACTIVE</span><span onclick="logoutChat()">[EXIT]</span></div>
                 <div id="chat-messages"></div>
-                <div id="chat-input-wrap">
-                    <input type="text" id="chat-input" placeholder="READY_FOR_INPUT..." autocomplete="off">
-                </div>
+                <div id="chat-input-wrap"><input type="text" id="chat-input" placeholder="READY..."></div>
             </div>
         </div>
 
         <div id="ix-footer">
             <div id="ix-footer-content">
-                <div id="footer-left" class="footer-part">SISTEMAS: <span id="sys-count">0</span></div>
+                <div class="footer-part">SISTEMAS: <span id="sys-count">0</span></div>
                 <div id="footer-center" class="footer-part">00:00:00</div>
-                <div id="footer-right" class="footer-part">© 2026 INDEXUM_V18.3.9</div>
+                <div class="footer-part" style="text-align:right">© 2026 INDEXUM_V1</div>
             </div>
         </div>
     </div>
@@ -228,75 +202,26 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, push, onChildAdded, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDHoFU5TiEq0LwsTUc04NifV57n1wDQAHg",
-            authDomain: "indexumchat.firebaseapp.com",
-            databaseURL: "https://indexumchat-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "indexumchat",
-            storageBucket: "indexumchat.firebasestorage.app",
-            messagingSenderId: "67069413036",
-            appId: "1:67069413036:web:4725c1f35ae027a9d04109"
-        };
-
+        const firebaseConfig = { apiKey: "AIzaSyDHoFU5TiEq0LwsTUc04NifV57n1wDQAHg", authDomain: "indexumchat.firebaseapp.com", databaseURL: "https://indexumchat-default-rtdb.europe-west1.firebasedatabase.app", projectId: "indexumchat", storageBucket: "indexumchat.firebasestorage.app", messagingSenderId: "67069413036", appId: "1:67069413036:web:4725c1f35ae027a9d04109" };
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-
-        // Global functions for module
-        window.loginChat = () => {
-            const user = document.getElementById('chat-user').value.trim();
-            const pass = document.getElementById('chat-pass').value;
-            if(user.length >= 3 && pass.length >= 4) {
-                localStorage.setItem('ix_chat_user', user);
-                checkChatSession();
-            } else {
-                alert("ERR: User > 2 chars, Pass > 3 chars.");
-            }
-        };
-
-        window.logoutChat = () => {
-            localStorage.removeItem('ix_chat_user');
-            location.reload();
-        };
-
-        function checkChatSession() {
-            const user = localStorage.getItem('ix_chat_user');
-            if(user) {
-                document.getElementById('chat-auth').style.display = 'none';
-                document.getElementById('chat-main').style.display = 'flex';
-                initChatLogic(user);
-            }
-        }
-
-        function initChatLogic(user) {
+        window.loginChat = () => { const u = document.getElementById('chat-user').value; if(u) { localStorage.setItem('ix_chat_user', u); location.reload(); }};
+        window.logoutChat = () => { localStorage.removeItem('ix_chat_user'); location.reload(); };
+        const user = localStorage.getItem('ix_chat_user');
+        if(user) {
+            document.getElementById('chat-auth').style.display = 'none';
+            document.getElementById('chat-main').style.display = 'flex';
             const input = document.getElementById('chat-input');
-            const box = document.getElementById('chat-messages');
-            
-            input.onkeypress = (e) => {
-                if(e.key === 'Enter' && input.value.trim()) {
-                    push(ref(db, 'messages'), { u: user, t: input.value, s: serverTimestamp() });
-                    input.value = '';
-                }
-            };
-
+            input.onkeypress = (e) => { if(e.key === 'Enter' && input.value) { push(ref(db, 'messages'), { u: user, t: input.value, s: serverTimestamp() }); input.value = ''; }};
             onChildAdded(ref(db, 'messages'), (snap) => {
-                const d = snap.val();
-                const m = document.createElement('div');
-                m.className = 'msg';
+                const d = snap.val(); const m = document.createElement('div'); m.className = 'msg';
                 m.innerHTML = `<span class="msg-u">${d.u}</span><span class="msg-t">${d.t}</span>`;
-                box.appendChild(m);
-                
-                // Mantiene limpio borrando visualmente mensajes antiguos (>25)
-                if(box.childNodes.length > 25) box.removeChild(box.firstChild);
-                
-                box.scrollTop = box.scrollHeight;
+                const box = document.getElementById('chat-messages'); box.appendChild(m); box.scrollTop = box.scrollHeight;
             });
         }
-        checkChatSession();
     </script>
 
     <script>
-        // Capa de seguridad
         window.unlockKernel = () => {
             document.getElementById('google-page').style.opacity = '0';
             setTimeout(() => {
@@ -306,46 +231,22 @@
             }, 600);
         };
 
-        function toggleChat() { 
-            document.getElementById('chat-sidebar').classList.toggle('open'); 
-        }
-
+        function toggleChat() { document.getElementById('chat-sidebar').classList.toggle('open'); }
         function triggerEmergency() { window.location.href = "https://classroom.google.com/"; }
         window.addEventListener('keydown', (e) => { if (e.key === "Control") triggerEmergency(); });
-
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-        }
-
+        function toggleTheme() { document.body.classList.toggle('light-mode'); }
+        
         function openSpotify() {
             const win = window.open('about:blank');
-            win.document.write(`
-                <html>
-                <head><title>Spotify Player</title></head>
-                <body style="margin:0; background:#000; display:flex; align-items:center; justify-content:center;">
-                    <div style="left: 0; width: 100%; height: 600px; position: relative;">
-                        <iframe src="https://open.spotify.com/embed/playlist/6hfxHDFSpmrx2EeA7JKwjv?utm_source=oembed"
-                                style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0; border-radius: 12px;"
-                                allowfullscreen
-                                allow="clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;">
-                        </iframe>
-                    </div>
-                </body>
-                </html>
-            `);
+            win.document.write(`<body style="margin:0;background:#000"><iframe src="https://open.spotify.com/embed/playlist/6hfxHDFSpmrx2EeA7JKwjv" style="width:100%;height:100vh;border:none"></iframe></body>`);
         }
 
         const sInput = document.getElementById('search-input');
-        // El login principal permanece igual
-        sInput.onkeyup = (e) => {
-            if (e.keyCode === 13 && sInput.value.toUpperCase() === "INDEXUM") {
-                unlockKernel();
-            }
-        };
+        sInput.onkeyup = (e) => { if (e.keyCode === 13 && sInput.value.toUpperCase() === "INDEXUM") unlockKernel(); };
 
         let favorites = JSON.parse(localStorage.getItem('ix_favs')) || [];
         const GAMES = [
-            { n: "CLOUD GAMING", u: "https://web.cloudmoonapp.com/es/", history: true },
+            { n: "CLOUD GAMING", u: "https://web.cloudmoonapp.com/es/" },
             { n: "PINBALL MASTER", u: "https://azgames.io/pinball-master.embed" },
             { n: "BOTTLE HOP", u: "https://azgames.io/bottle-hop.embed" },
             { n: "RAGDOLL FLIP", u: "https://azgames.io/ragdoll-flip.embed" },
@@ -360,92 +261,22 @@
             { n: "SNAKE", u: "478297682" },
             { n: "2048", u: "880374575" },
             { n: "MINECRAFT", u: "https://eaglercraft.q13x.com/" },
-            { n: "SLOWROADS", u: "https://slowroads.io/" },
             { n: "GEOMETRY DASH", u: "https://azgames.io/geometry-dash.embed" },
-            { n: "OPENGUESSR", u: "https://openguessr.com/", vpn: true },
             { n: "FNAF", u: "https://run3.io/popgame/fnaf/fnaf1/" },
             { n: "POLYTRACK", u: "https://polytrack.bitbucket.io/polytrack/" },
-            { n: "SUPERHOT", u: "https://superhotgame.com/superhot-prototype/" },
-            { n: "VEX 4", u: "https://ubg98.github.io/Vex4/" },
             { n: "PAPER IO 2", u: "https://paperio2.gitlab.io/file" },
-            { n: "PAPER IO 2 LOBBY", u: "https://paperio.site/ps/?p-ca1e9hf5sv" },
             { n: "MOTO X3M", u: "https://moto-x3m.bitbucket.io/" },
-            { n: "BITLIFE", u: "https://bitlifeonline.bitbucket.io/" },
             { n: "SLOPE", u: "https://slopegame-online.com/" },
-            { n: "CS TIMER", u: "https://cstimer.net/" },
             { n: "SUBWAY SURFERS", u: "https://subway-surfers.gg/" },
-            { n: "WPLACE", u: "https://wplace.live/" },
             { n: "STEAL A BRAINROT", u: "https://gamea.azgame.io/rob-brainrot-2//" },
-            { n: "IRON SNOUT", u: "https://23azostore.github.io/s/iron-snout/" },
-            { n: "SOCCER DERBY", u: "https://rocketsoccerderby.gitlab.io/#" },
-            { n: "UNDEAD CORRIDOR", u: "https://gamea.azgame.io/undead-corridor/" },
             { n: "HEAD SOCCER", u: "https://azgames.io/head-soccer-2024.embed" },
-            { n: "SLITHER.IO", u: "https://scratch.mit.edu/projects/108566337/embed" },
-            { n: "EV.IO", u: "https://ev.io/" },
             { n: "FNAE", u: "https://fivenightsatepsteins.org/fivenightsatepsteins-online/embed?autoplay=true" },
             { n: "MONKEY MART", u: "https://monkey-mart.gamestores.fun/" },
-            { n: "BASKET RANDOM", u: "https://ubg6969.gitlab.io/game/basketrandom.html" },
-            { n: "DRIFT HUNTERS", u: "https://drift-hunters.co/drift-hunters-games" },
-            { n: "GETAWAY SHOT", u: "https://getawayshootout.pages.dev/" },
             { n: "BACKROOMS", u: "https://geet.in.net/get/backrooms/game.html" },
-            { n: "BASKET BATTLE", u: "https://gamesnacks.com/games/1e2ocejsf0rm8", vpn: true },
-            { n: "ESCAPE ROAD CITY 2", u: "https://game.azgame.io/escape-road-city-2/" },
-            { n: "SIGMA PROTOCOL", u: "https://sigmacompanyoficial.github.io/Idle-Foso-Cliker/" },
-            { n: "ZOMBS ROYALE", u: "https://zombsroyale.io/" },
-            { n: "VOLLEY RANDOM", u: "https://volley-random.gitlab.io/" },
-            { n: "VENGE.IO", u: "https://venge.io/" },
-            { n: "SPACE WAVES", u: "https://spacewaves.io/" },
-            { n: "SOCCER RANDOM", u: "https://soccer-randomx.github.io/" },
-            { n: "CRAZY TAXI", u: "https://azgames.io/crazy-taxi.embed" },
-            { n: "ORBIT KICK", u: "https://azgames.io/orbit-kick.embed" },
-            { n: "RAGDOLL PLAYGROUND", u: "https://azgames.io/ragdoll-playground.embed" },
-            { n: "SORRY BOB", u: "https://azgames.io/sorry-bob.embed" },
-            { n: "GOLF HIT", u: "https://azgames.io/golf-hit.embed" },
-            { n: "TRAFFIC RALLY", u: "https://azgames.io/traffic-rally.embed" },
-            { n: "DUDE THEFT AUTO", u: "https://azgames.io/dude-theft-auto.embed" },
-            { n: "1V1.LOL", u: "https://azgames.io/1v1lol.embed", vpn: true },
-            { n: "KRUNKER", u: "https://azgames.io/krunker.embed", vpn: true },
-            { n: "BUCKET SMASH", u: "https://azgames.io/bucket-smash.embed" },
-            { n: "GOLF PUZZLE", u: "https://azgames.io/golf-puzzle.embed" },
-            { n: "LIZARD CLICKER", u: "https://azgames.io/lizard-lizard-clicker.embed" },
-            { n: "SNAKE MODS", u: "https://googlesnakemods.com/v/current/" },
-            { n: "CHILL GUY CLICKER", u: "https://azgames.io/chill-guy-clicker.embed" },
-            { n: "CHASE RUSH", u: "https://azgames.io/chase-rush.embed" },
-            { n: "FALL FLAT BATTLE", u: "https://azgames.io/fall-flat-battle.embed" },
-            { n: "FUN TYPING IO", u: "https://azgames.io/fun-typing-io.embed" },
-            { n: "STICKMAN HOOK", u: "https://azgames.io/stickman-hook.embed" },
-            { n: "DRIVE MAD", u: "https://azgames.io/drive-mad.embed" },
-            { n: "CURVE RUSH", u: "https://azgames.io/curve-rush.embed" },
-            { n: "ORBIT BEATS", u: "https://azgames.io/orbit-beats.embed" },
-            { n: "BRAIN LINES", u: "https://azgames.io/brain-lines.embed" },
-            { n: "SPRUNKI", u: "https://azgames.io/sprunki.embed" },
-            { n: "HOCKEY RANDOM", u: "https://azgames.io/hockey-random.embed" },
-            { n: "KNIFE MASTER", u: "https://azgames.io/knife-master.embed" },
-            { n: "BASKETBALL STARS", u: "https://azgames.io/basketball-stars.embed" },
-            { n: "FURY CHASE", u: "https://azgames.io/fury-chase.embed" },
-            { n: "ORBIT RUSH", u: "https://azgames.io/orbit-rush.embed" },
-            { n: "RAGDOLL LAUNCHER", u: "https://azgames.io/ragdoll-launcher.embed" },
-            { n: "SLOPE RIDER", u: "https://azgames.io/slope-rider.embed" },
-            { n: "TUNG SAHUR HORROR", u: "https://azgames.io/tung-sahur-horror.embed" },
-            { n: "RETRO BLASTER", u: "https://azgames.io/retro-blaster.embed" },
-            { n: "SCARY WHEELS", u: "https://azgames.io/scary-wheels.embed" },
             { n: "LEVEL DEVIL", u: "https://level-devil.io/" },
-            { n: "MELON SANDBOX", u: "https://melonsandbox.com/", vpn: true },
-            { n: "DIALED.GG", u: "https://dialed.gg/", vpn: true },
             { n: "TETRIX ONLINE", u: "https://azgames.io/tetrix-online.embed" },
-            { n: "SHIP SMASHER", u: "https://azgames.io/ship-smasher.embed" },
-            { n: "LAB HAVOC", u: "https://azgames.io/lab-havoc.embed" },
-            { n: "RETRO RUSH", u: "https://azgames.io/retro-rush.embed" },
-            { n: "GARFIELD WAR", u: "https://azgames.io/garfield-war.embed" },
-            { n: "RUBY RAID", u: "https://azgames.io/ruby-raid.embed" },
-            { n: "BOW BATTLE", u: "https://azgames.io/bow-battle.embed" },
-            { n: "HOLE ARENA", u: "https://azgames.io/hole-arena.embed" },
-            { n: "PATATAP", u: "https://patatap.com/" },
-            { n: "BORED BUTTON", u: "https://www.boredbutton.com/" },
-            { n: "ZOOMQUILT", u: "https://zzz.zoomquilt.org/" },
-            { n: "100.000 STARS", u: "https://stars.chromeexperiments.com/" },
-            { n: "INVISIBLE COW", u: "https://findtheinvisiblecow.com/" },
-            { n: "OPTICAL TOYS", u: "https://optical.toys/" }
+            { n: "SPRUNKI", u: "https://azgames.io/sprunki.embed" },
+            { n: "BORED BUTTON", u: "https://www.boredbutton.com/" }
         ];
 
         function loadMenu(filter = "") {
@@ -460,18 +291,12 @@
         }
 
         function createCard(g, i) {
-            const card = document.createElement('div'); card.className = 'game-btn'; card.style.animationDelay = `${i * 0.03}s`;
+            const card = document.createElement('div'); card.className = 'game-btn';
             card.innerHTML = `<div class="btn-top"><span>${g.n}</span><span class="fav-star ${favorites.includes(g.n)?'active':''}" onclick="toggleFav('${g.n}', event)">★</span></div>${g.vpn ? '<div class="vpn-tag">VPN</div>' : ''}`;
             card.onclick = () => {
-                if(g.history) {
-                    if(confirm("AVISO: Este juego NO se abrirá en about:blank. Aparecerá en el historial de navegación. ¿Continuar?")) {
-                        window.open(g.u, '_blank');
-                    }
-                } else {
-                    let finalUrl = (g.u.length < 15 && !g.u.includes('.')) ? `https://turbowarp.org/${g.u}/embed?autoplay=1` : g.u;
-                    const win = window.open('about:blank');
-                    win.document.write(`<html><head><title>System Load</title></head><style>body,html{margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;}</style><body><iframe src="${finalUrl}" allow="autoplay; fullscreen; keyboard" allowfullscreen></iframe></body></html>`);
-                }
+                let finalUrl = (g.u.length < 15 && !g.u.includes('.')) ? `https://turbowarp.org/${g.u}/embed?autoplay=1` : g.u;
+                const win = window.open('about:blank');
+                win.document.write(`<html><head><title>System Load</title></head><style>body,html{margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;background:#000;}iframe{width:100%;height:100%;border:none;}</style><body><iframe src="${finalUrl}" allow="autoplay; fullscreen; keyboard" allowfullscreen></iframe></body></html>`);
             };
             return card;
         }
@@ -482,15 +307,10 @@
             const c = document.getElementById('bin-canvas'); const ctx = c.getContext('2d');
             c.width = window.innerWidth; c.height = window.innerHeight;
             const drops = Array(Math.floor(c.width / 20)).fill(1);
-            ctx.font = "14px Courier New";
             setInterval(() => {
                 ctx.fillStyle = document.body.classList.contains('light-mode') ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"; 
-                ctx.fillRect(0,0,c.width,c.height);
-                ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--matrix-color');
-                drops.forEach((y, i) => {
-                    ctx.fillText(Math.floor(Math.random()*2), i*20, y*14);
-                    if(y*14 > c.height && Math.random() > 0.975) drops[i] = 0; drops[i]++;
-                });
+                ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--matrix-color');
+                drops.forEach((y, i) => { ctx.fillText(Math.floor(Math.random()*2), i*20, y*14); if(y*14 > c.height && Math.random() > 0.975) drops[i] = 0; drops[i]++; });
             }, 33);
         }
     </script>
