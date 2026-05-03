@@ -14,7 +14,7 @@
             --spotify-green: #1DB954;
             --text-color: #ffffff;
             --matrix-color: #ffffff;
-            --border-color: #444; /* Color de borde para botones top */
+            --border-color: #444;
         }
 
         /* Variables Modo Claro */
@@ -66,7 +66,6 @@
         #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: var(--text-color); font-family: 'Courier New', monospace; overflow-y: auto; }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
         
-        /* Top Buttons Area */
         #top-buttons-container { position: fixed; top: 20px; left: 20px; display: flex; align-items: center; gap: 10px; z-index: 2000; }
         
         .top-btn {
@@ -242,7 +241,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Global functions for module
         window.loginChat = () => {
             const user = document.getElementById('chat-user').value.trim();
             const pass = document.getElementById('chat-pass').value;
@@ -285,10 +283,7 @@
                 m.className = 'msg';
                 m.innerHTML = `<span class="msg-u">${d.u}</span><span class="msg-t">${d.t}</span>`;
                 box.appendChild(m);
-                
-                // Mantiene limpio borrando visualmente mensajes antiguos (>25)
                 if(box.childNodes.length > 25) box.removeChild(box.firstChild);
-                
                 box.scrollTop = box.scrollHeight;
             });
         }
@@ -296,7 +291,6 @@
     </script>
 
     <script>
-        // Capa de seguridad
         window.unlockKernel = () => {
             document.getElementById('google-page').style.opacity = '0';
             setTimeout(() => {
@@ -336,7 +330,6 @@
         }
 
         const sInput = document.getElementById('search-input');
-        // El login principal permanece igual
         sInput.onkeyup = (e) => {
             if (e.keyCode === 13 && sInput.value.toUpperCase() === "INDEXUM") {
                 unlockKernel();
@@ -344,6 +337,7 @@
         };
 
         let favorites = JSON.parse(localStorage.getItem('ix_favs')) || [];
+        
         const GAMES = [
             { n: "PINBALL MASTER", u: "https://azgames.io/pinball-master.embed" },
             { n: "BOTTLE HOP", u: "https://azgames.io/bottle-hop.embed" },
