@@ -14,7 +14,7 @@
             --spotify-green: #1DB954;
             --text-color: #ffffff;
             --matrix-color: #ffffff;
-            --border-color: #444;
+            --border-color: #444; /* Color de borde para botones top */
         }
 
         /* Variables Modo Claro */
@@ -66,6 +66,7 @@
         #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: var(--text-color); font-family: 'Courier New', monospace; overflow-y: auto; }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
         
+        /* Top Buttons Area */
         #top-buttons-container { position: fixed; top: 20px; left: 20px; display: flex; align-items: center; gap: 10px; z-index: 2000; }
         
         .top-btn {
@@ -241,6 +242,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
+        // Global functions for module
         window.loginChat = () => {
             const user = document.getElementById('chat-user').value.trim();
             const pass = document.getElementById('chat-pass').value;
@@ -283,7 +285,10 @@
                 m.className = 'msg';
                 m.innerHTML = `<span class="msg-u">${d.u}</span><span class="msg-t">${d.t}</span>`;
                 box.appendChild(m);
+                
+                // Mantiene limpio borrando visualmente mensajes antiguos (>25)
                 if(box.childNodes.length > 25) box.removeChild(box.firstChild);
+                
                 box.scrollTop = box.scrollHeight;
             });
         }
@@ -291,6 +296,7 @@
     </script>
 
     <script>
+        // Capa de seguridad
         window.unlockKernel = () => {
             document.getElementById('google-page').style.opacity = '0';
             setTimeout(() => {
@@ -330,6 +336,7 @@
         }
 
         const sInput = document.getElementById('search-input');
+        // El login principal permanece igual
         sInput.onkeyup = (e) => {
             if (e.keyCode === 13 && sInput.value.toUpperCase() === "INDEXUM") {
                 unlockKernel();
@@ -337,8 +344,8 @@
         };
 
         let favorites = JSON.parse(localStorage.getItem('ix_favs')) || [];
-        
         const GAMES = [
+            { n: "CLOUD GAMING", u: "https://web.cloudmoonapp.com/es/", history: true },
             { n: "PINBALL MASTER", u: "https://azgames.io/pinball-master.embed" },
             { n: "BOTTLE HOP", u: "https://azgames.io/bottle-hop.embed" },
             { n: "RAGDOLL FLIP", u: "https://azgames.io/ragdoll-flip.embed" },
@@ -456,9 +463,15 @@
             const card = document.createElement('div'); card.className = 'game-btn'; card.style.animationDelay = `${i * 0.03}s`;
             card.innerHTML = `<div class="btn-top"><span>${g.n}</span><span class="fav-star ${favorites.includes(g.n)?'active':''}" onclick="toggleFav('${g.n}', event)">★</span></div>${g.vpn ? '<div class="vpn-tag">VPN</div>' : ''}`;
             card.onclick = () => {
-                let finalUrl = (g.u.length < 15 && !g.u.includes('.')) ? `https://turbowarp.org/${g.u}/embed?autoplay=1` : g.u;
-                const win = window.open('about:blank');
-                win.document.write(`<html><head><title>System Load</title></head><style>body,html{margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;}</style><body><iframe src="${finalUrl}" allow="autoplay; fullscreen; keyboard" allowfullscreen></iframe></body></html>`);
+                if(g.history) {
+                    if(confirm("AVISO: Este juego NO se abrirá en about:blank. Aparecerá en el historial de navegación. ¿Continuar?")) {
+                        window.open(g.u, '_blank');
+                    }
+                } else {
+                    let finalUrl = (g.u.length < 15 && !g.u.includes('.')) ? `https://turbowarp.org/${g.u}/embed?autoplay=1` : g.u;
+                    const win = window.open('about:blank');
+                    win.document.write(`<html><head><title>System Load</title></head><style>body,html{margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;}</style><body><iframe src="${finalUrl}" allow="autoplay; fullscreen; keyboard" allowfullscreen></iframe></body></html>`);
+                }
             };
             return card;
         }
