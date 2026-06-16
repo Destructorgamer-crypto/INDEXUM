@@ -83,6 +83,7 @@
 
         #emergency-btn:hover { background: var(--emergency-red); border-color: var(--emergency-red); color: #fff; }
         #chat-open-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+        #admin-open-btn:hover { background: #0f0; border-color: #0f0; color: #000; }
         
         #emergency-hint { font-size: 10px; color: #555; letter-spacing: 1px; margin-left: 5px; }
 
@@ -188,6 +189,7 @@
         <div id="top-buttons-container">
             <button id="emergency-btn" class="top-btn" onclick="triggerEmergency()">EMERGENCIA</button>
             <button id="chat-open-btn" class="top-btn" onclick="toggleChat()">CHAT</button>
+            <button id="admin-open-btn" class="top-btn" onclick="openAdmin()">ADMIN</button>
             <span id="emergency-hint">APRETA ''CTRL''</span>
         </div>
 
@@ -310,7 +312,6 @@
             }, 600);
         };
 
-        // Activar admin panel con "admin" en consola
         window.openAdmin = () => document.getElementById('admin-panel').style.display = 'block';
 
         function toggleChat() { document.getElementById('chat-sidebar').classList.toggle('open'); }
