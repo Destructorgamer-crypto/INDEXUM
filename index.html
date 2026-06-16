@@ -478,5 +478,150 @@
             }, 33);
         }
     </script>
+    /* =========================
+   ADMIN PANEL
+========================= */
+
+let ADMIN_GAMES = JSON.parse(localStorage.getItem("ix_games"));
+
+if (ADMIN_GAMES && Array.isArray(ADMIN_GAMES)) {
+    GAMES = ADMIN_GAMES;
+}
+
+function saveGames() {
+    localStorage.setItem("ix_games", JSON.stringify(GAMES));
+
+    if (typeof loadMenu === "function") {
+        loadMenu();
+    }
+
+    const count = document.getElementById("sys-count");
+    if (count) {
+        count.innerText = GAMES.length;
+    }
+}
+
+function openAdmin() {
+    const pass = prompt("Contraseña:");
+
+    if (!pass) return;
+
+    if (pass !== "Eloy28815342") {
+        alert("Contraseña incorrecta");
+        return;
+    }
+
+    renderAdminGames();
+
+    document.getElementById("admin-panel").style.display = "block";
+}
+
+function closeAdmin() {
+    document.getElementById("admin-panel").style.display = "none";
+}
+
+function renderAdminGames() {
+    const container = document.getElementById("admin-games");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    GAMES.forEach((game, index) => {
+
+        const row = document.createElement("div");
+
+        row.style.display = "flex";
+        row.style.justifyContent = "space-between";
+        row.style.alignItems = "center";
+        row.style.padding = "6px";
+        row.style.borderBottom = "1px solid #333";
+
+        const title = document.createElement("span");
+        title.textContent = game.n;
+
+        const del = document.createElement("button");
+        del.textContent = "❌";
+
+        del.onclick = () => {
+            if (!confirm(`Eliminar "${game.n}" ?`)) return;
+
+            GAMES.splice(index, 1);
+
+            saveGames();
+            renderAdminGames();
+        };
+
+        row.appendChild(title);
+        row.appendChild(del);
+
+        container.appendChild(row);
+    });
+}
+
+function addGame() {
+
+    const name = document.getElementById("newGameName").value.trim();
+    const url = document.getElementById("newGameUrl").value.trim();
+
+    if (!name || !url) {
+        alert("Completa todos los campos");
+        return;
+    }
+
+    GAMES.push({
+        n: name.toUpperCase(),
+        u: url
+    });
+
+    document.getElementById("newGameName").value = "";
+    document.getElementById("newGameUrl").value = "";
+
+    saveGames();
+    renderAdminGames();
+}
+
+/* Crea el panel automáticamente */
+
+document.body.insertAdjacentHTML("beforeend", `
+<div id="admin-panel"
+style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:700px;
+max-width:95vw;
+height:80vh;
+background:#111;
+border:1px solid #444;
+z-index:999999;
+padding:15px;
+overflow:auto;
+">
+
+<h2>ADMIN PANEL</h2>
+
+<div style="display:flex;gap:8px;margin-bottom:10px;">
+<input
+id="newGameName"
+placeholder="Nombre"
+style="flex:1;padding:8px;">
+<input
+id="newGameUrl"
+placeholder="URL"
+style="flex:2;padding:8px;">
+<button onclick="addGame()">Añadir</button>
+</div>
+
+<div id="admin-games"></div>
+
+<div style="margin-top:12px;">
+<button onclick="closeAdmin()">Cerrar</button>
+</div>
+
+</div>
+`);
 </body>
 </html>
