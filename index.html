@@ -62,8 +62,8 @@
             font-size: 14px; color: #747775; cursor: pointer; background: #fff;
         }
 
-        /* --- INDEXUM KERNEL --- */
-        #indexum-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: var(--text-color); font-family: 'Courier New', monospace; overflow-y: auto; }
+        /* --- KRONOS KERNEL --- */
+        #kronos-kernel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; color: var(--text-color); font-family: 'Courier New', monospace; overflow-y: auto; }
         #bin-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.30; z-index: -1; }
         
         /* Top Buttons Area */
@@ -173,7 +173,7 @@
         <div id="personalize-btn"><svg width="20" height="20" viewBox="0 0 24 24" style="margin-right:8px;"><path fill="#747775" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> Personalizar Chrome</div>
     </div>
 
-    <div id="indexum-kernel">
+    <div id="kronos-kernel">
         <div id="top-buttons-container">
             <button id="emergency-btn" class="top-btn" onclick="triggerEmergency()">EMERGENCIA</button>
             <button id="chat-open-btn" class="top-btn" onclick="toggleChat()">CHAT</button>
@@ -220,7 +220,7 @@
             <div id="ix-footer-content">
                 <div id="footer-left" class="footer-part">SISTEMAS: <span id="sys-count">0</span></div>
                 <div id="footer-center" class="footer-part">00:00:00</div>
-                <div id="footer-right" class="footer-part">© 2026 INDEXUM_V18.3.9</div>
+                <div id="footer-right" class="footer-part">© 2026 KRONOS_V1.2</div>
             </div>
         </div>
     </div>
@@ -301,7 +301,7 @@
             document.getElementById('google-page').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('google-page').style.display = 'none';
-                document.getElementById('indexum-kernel').style.display = 'block';
+                document.getElementById('kronos-kernel').style.display = 'block';
                 initMatrix(); initFooter(); loadMenu();
             }, 600);
         };
@@ -338,7 +338,7 @@
         const sInput = document.getElementById('search-input');
         // El login principal permanece igual
         sInput.onkeyup = (e) => {
-            if (e.keyCode === 13 && sInput.value.toUpperCase() === "INDEXUM") {
+            if (e.keyCode === 13 && sInput.value.toUpperCase() === "KRONOS") {
                 unlockKernel();
             }
         };
