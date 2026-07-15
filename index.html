@@ -17,14 +17,48 @@
             --border-color: #444; /* Color de borde para botones top */
         }
 
-        /* Variables Modo Claro */
-        body.light-mode {
-            --bg: #ffffff;
-            --panel: rgba(0, 0, 0, 0.05);
-            --text-color: #000000;
-            --accent: #000000;
-            --matrix-color: #000000;
+        /* ===== TEMAS ===== */
+        /* Oscuro (predeterminado) */
+        body.theme-dark {
+            --bg: #000000; --panel: rgba(255,255,255,0.05);
+            --text-color: #ffffff; --accent: #ffffff; --matrix-color: #ffffff;
+            --border-color: #444;
+        }
+        /* Claro */
+        body.theme-light {
+            --bg: #ffffff; --panel: rgba(0,0,0,0.05);
+            --text-color: #000000; --accent: #000000; --matrix-color: #000000;
             --border-color: #ccc;
+        }
+        /* Matrix (verde) */
+        body.theme-green {
+            --bg: #000000; --panel: rgba(0,255,65,0.06);
+            --text-color: #00ff41; --accent: #00ff41; --matrix-color: #00ff41;
+            --border-color: #0a3d1a;
+        }
+        /* Alerta (rojo) */
+        body.theme-red {
+            --bg: #000000; --panel: rgba(255,51,51,0.06);
+            --text-color: #ff3b3b; --accent: #ff3b3b; --matrix-color: #ff3b3b;
+            --border-color: #4d0000;
+        }
+        /* Cian */
+        body.theme-cyan {
+            --bg: #000000; --panel: rgba(0,229,255,0.06);
+            --text-color: #00e5ff; --accent: #00e5ff; --matrix-color: #00e5ff;
+            --border-color: #004d54;
+        }
+        /* Púrpura */
+        body.theme-purple {
+            --bg: #000000; --panel: rgba(185,103,255,0.06);
+            --text-color: #bb66ff; --accent: #bb66ff; --matrix-color: #bb66ff;
+            --border-color: #3d0a52;
+        }
+        /* Ámbar */
+        body.theme-amber {
+            --bg: #000000; --panel: rgba(255,176,0,0.06);
+            --text-color: #ffb000; --accent: #ffb000; --matrix-color: #ffb000;
+            --border-color: #4d3300;
         }
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Segoe UI', Roboto, sans-serif; overflow: hidden; background: #fff; }
@@ -70,11 +104,11 @@
         #top-buttons-container { position: fixed; top: 20px; left: 20px; display: flex; align-items: center; gap: 10px; z-index: 2000; }
         
         .top-btn {
-            padding: 10px 15px; background: #222; color: #fff; border: 1px solid var(--border-color);
+            padding: 10px 15px; background: #191919; color: var(--text-color); border: 1px solid var(--border-color);
             font-size: 11px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; font-weight: bold;
             font-family: 'Courier New', monospace;
         }
-        body.light-mode .top-btn { background: #eee; color: #000; }
+        body.theme-light .top-btn { background: #eee; color: #000; }
 
         #emergency-btn:hover { background: var(--emergency-red); border-color: var(--emergency-red); color: #fff; }
         #chat-open-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
@@ -83,10 +117,43 @@
 
         #theme-toggle { position: fixed; top: 20px; right: 120px; z-index: 2000; }
         .theme-btn {
-            padding: 8px 12px; background: #222; color: #fff; border: 1px solid var(--border-color);
+            padding: 8px 12px; background: #191919; color: var(--text-color); border: 1px solid var(--border-color);
             font-size: 10px; cursor: pointer; border-radius: 20px; font-weight: bold; font-family: 'Courier New', monospace;
+            display: flex; align-items: center; gap: 6px;
         }
-        body.light-mode .theme-btn { background: #eee; color: #000; }
+        body.theme-light .theme-btn { background: #eee; color: #000; }
+        .theme-btn .swatch-dot {
+            width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+            box-shadow: 0 0 6px var(--accent); flex-shrink: 0;
+        }
+
+        /* Panel de personalización de temas */
+        #theme-panel {
+            position: fixed; top: 60px; right: 120px; z-index: 2500;
+            background: #0a0a0a; border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 16px; width: 210px; display: none; flex-direction: column; gap: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            font-family: 'Courier New', monospace;
+        }
+        body.theme-light #theme-panel { background: #fafafa; }
+        #theme-panel.open { display: flex; }
+        #theme-panel-title {
+            font-size: 10px; letter-spacing: 2px; color: #888; margin-bottom: 4px;
+        }
+        .theme-option {
+            display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+            border: 1px solid #262626; border-radius: 6px; cursor: pointer;
+            background: #111; transition: all 0.15s; font-size: 11px; color: #ddd;
+            letter-spacing: 1px;
+        }
+        body.theme-light .theme-option { background: #f0f0f0; color: #222; border-color: #ddd; }
+        .theme-option:hover { border-color: var(--accent-preview, #666); transform: translateX(2px); }
+        .theme-option.active { border-color: var(--accent-preview, #fff); box-shadow: 0 0 0 1px var(--accent-preview, #fff); }
+        .theme-option .swatch {
+            width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+            background: var(--sw-bg); border: 2px solid var(--sw-fg);
+            box-shadow: 0 0 8px var(--sw-fg);
+        }
 
         #spotify-top-wrap { position: fixed; top: 20px; right: 20px; z-index: 2000; }
         .spotify-btn {
@@ -181,7 +248,31 @@
         </div>
 
         <div id="theme-toggle">
-            <button class="theme-btn" onclick="toggleTheme()">MODO L/O</button>
+            <button class="theme-btn" onclick="toggleThemePanel()"><span class="swatch-dot"></span>PERSONALIZAR</button>
+            <div id="theme-panel">
+                <div id="theme-panel-title">SELECCIONA UN TEMA</div>
+                <div class="theme-option" data-theme="dark" style="--sw-bg:#000000; --sw-fg:#ffffff;" onclick="setTheme('dark')">
+                    <span class="swatch"></span> OSCURO
+                </div>
+                <div class="theme-option" data-theme="light" style="--sw-bg:#ffffff; --sw-fg:#000000;" onclick="setTheme('light')">
+                    <span class="swatch"></span> CLARO
+                </div>
+                <div class="theme-option" data-theme="green" style="--sw-bg:#000000; --sw-fg:#00ff41;" onclick="setTheme('green')">
+                    <span class="swatch"></span> MATRIX
+                </div>
+                <div class="theme-option" data-theme="red" style="--sw-bg:#000000; --sw-fg:#ff3b3b;" onclick="setTheme('red')">
+                    <span class="swatch"></span> ALERTA ROJA
+                </div>
+                <div class="theme-option" data-theme="cyan" style="--sw-bg:#000000; --sw-fg:#00e5ff;" onclick="setTheme('cyan')">
+                    <span class="swatch"></span> CIAN
+                </div>
+                <div class="theme-option" data-theme="purple" style="--sw-bg:#000000; --sw-fg:#bb66ff;" onclick="setTheme('purple')">
+                    <span class="swatch"></span> PÚRPURA
+                </div>
+                <div class="theme-option" data-theme="amber" style="--sw-bg:#000000; --sw-fg:#ffb000;" onclick="setTheme('amber')">
+                    <span class="swatch"></span> ÁMBAR
+                </div>
+            </div>
         </div>
 
         <div id="spotify-top-wrap">
@@ -313,9 +404,39 @@
         function triggerEmergency() { window.location.href = "https://classroom.google.com/"; }
         window.addEventListener('keydown', (e) => { if (e.key === "Control") triggerEmergency(); });
 
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
+        const THEMES = ['dark', 'light', 'green', 'red', 'cyan', 'purple', 'amber'];
+
+        function applyTheme(name) {
+            if (!THEMES.includes(name)) name = 'dark';
+            document.body.classList.remove(...THEMES.map(t => `theme-${t}`));
+            document.body.classList.add(`theme-${name}`);
+            document.querySelectorAll('.theme-option').forEach(el => {
+                el.classList.toggle('active', el.dataset.theme === name);
+            });
         }
+
+        function setTheme(name) {
+            applyTheme(name);
+            localStorage.setItem('ix_theme', name);
+            closeThemePanel();
+        }
+
+        function toggleThemePanel() {
+            document.getElementById('theme-panel').classList.toggle('open');
+        }
+
+        function closeThemePanel() {
+            document.getElementById('theme-panel').classList.remove('open');
+        }
+
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('theme-panel');
+            const wrap = document.getElementById('theme-toggle');
+            if (panel.classList.contains('open') && !wrap.contains(e.target)) closeThemePanel();
+        });
+
+        // Aplica el tema guardado (u OSCURO por defecto) al cargar
+        applyTheme(localStorage.getItem('ix_theme') || 'dark');
 
         function openSpotify() {
             const win = window.open('about:blank');
@@ -488,7 +609,7 @@
             const drops = Array(Math.floor(c.width / 20)).fill(1);
             ctx.font = "14px Courier New";
             setInterval(() => {
-                ctx.fillStyle = document.body.classList.contains('light-mode') ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"; 
+                ctx.fillStyle = document.body.classList.contains('theme-light') ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"; 
                 ctx.fillRect(0,0,c.width,c.height);
                 ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--matrix-color');
                 drops.forEach((y, i) => {
@@ -500,8 +621,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
