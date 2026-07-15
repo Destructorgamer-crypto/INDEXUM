@@ -143,18 +143,7 @@
         #footer-left { text-align: left; }
         #footer-center { text-align: center; }
         #footer-right { text-align: right; }
-    
-<style id="kronos-panel-style">
-#settings-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);display:none;z-index:4500}
-#settings-panel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.95);opacity:0;transition:.25s;background:#111;border:1px solid #444;border-radius:12px;color:#fff;padding:20px;width:340px;z-index:5000;font-family:'Courier New',monospace}
-#settings-overlay.show{display:block}
-#settings-overlay.show #settings-panel{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.theme-option{padding:10px;border:1px solid #333;margin:8px 0;border-radius:8px;cursor:pointer}
-.theme-option:hover{background:#222}
-.close-settings{float:right;cursor:pointer}
-</style>
-
-</style>
+    </style>
 </head>
 <body>
 
@@ -192,7 +181,7 @@
         </div>
 
         <div id="theme-toggle">
-            <button class="theme-btn" onclick="toggleTheme()">PERSONALIZAR</button>
+            <button class="theme-btn" onclick="toggleTheme()">MODO L/O</button>
         </div>
 
         <div id="spotify-top-wrap">
@@ -341,32 +330,7 @@
                                 allow="clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;">
                         </iframe>
                     </div>
-                
-<div id="settings-overlay">
-<div id="settings-panel">
-<div><b>KRONOS SETTINGS</b><span class="close-settings" onclick="closeSettings()">✕</span></div>
-<hr>
-<div class="theme-option">🌑 Dark</div>
-<div class="theme-option">☀️ Light</div>
-<div class="theme-option">🔵 Blue</div>
-<div class="theme-option">🟢 Green</div>
-<div class="theme-option">🔴 Red</div>
-<div class="theme-option">⚫ Black</div>
-<div class="theme-option">🟣 Purple</div>
-<div class="theme-option">🟢 Matrix</div>
-</div></div>
-
-<script>
-function openSettings(){document.getElementById('settings-overlay').classList.add('show');}
-function closeSettings(){document.getElementById('settings-overlay').classList.remove('show');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();});
-document.addEventListener('click',e=>{if(e.target.id==='settings-overlay')closeSettings();});
-window.addEventListener('load',()=>{
- const b=document.querySelector('#theme-toggle button');
- if(b){b.onclick=openSettings;}
-});
-</script>
-</body>
+                </body>
                 </html>
             `);
         }
@@ -511,32 +475,7 @@ window.addEventListener('load',()=>{
             card.onclick = () => {
                 let finalUrl = (g.u.length < 15 && !g.u.includes('.')) ? `https://turbowarp.org/${g.u}/embed?autoplay=1` : g.u;
                 const win = window.open('about:blank');
-                win.document.write(`<html><head><title>System Load</title></head><style>body,html{margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;}</style><body><iframe src="${finalUrl}" allow="autoplay; fullscreen; keyboard" allowfullscreen></iframe>
-<div id="settings-overlay">
-<div id="settings-panel">
-<div><b>KRONOS SETTINGS</b><span class="close-settings" onclick="closeSettings()">✕</span></div>
-<hr>
-<div class="theme-option">🌑 Dark</div>
-<div class="theme-option">☀️ Light</div>
-<div class="theme-option">🔵 Blue</div>
-<div class="theme-option">🟢 Green</div>
-<div class="theme-option">🔴 Red</div>
-<div class="theme-option">⚫ Black</div>
-<div class="theme-option">🟣 Purple</div>
-<div class="theme-option">🟢 Matrix</div>
-</div></div>
-
-<script>
-function openSettings(){document.getElementById('settings-overlay').classList.add('show');}
-function closeSettings(){document.getElementById('settings-overlay').classList.remove('show');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();});
-document.addEventListener('click',e=>{if(e.target.id==='settings-overlay')closeSettings();});
-window.addEventListener('load',()=>{
- const b=document.querySelector('#theme-toggle button');
- if(b){b.onclick=openSettings;}
-});
-</script>
-</body></html>`);
+                win.document.write(`<html><head><title>System Load</title></head><style>body,html{margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;}</style><body><iframe src="${finalUrl}" allow="autoplay; fullscreen; keyboard" allowfullscreen></iframe></body></html>`);
             };
             return card;
         }
@@ -559,32 +498,10 @@ window.addEventListener('load',()=>{
             }, 33);
         }
     </script>
-
-<div id="settings-overlay">
-<div id="settings-panel">
-<div><b>KRONOS SETTINGS</b><span class="close-settings" onclick="closeSettings()">✕</span></div>
-<hr>
-<div class="theme-option">🌑 Dark</div>
-<div class="theme-option">☀️ Light</div>
-<div class="theme-option">🔵 Blue</div>
-<div class="theme-option">🟢 Green</div>
-<div class="theme-option">🔴 Red</div>
-<div class="theme-option">⚫ Black</div>
-<div class="theme-option">🟣 Purple</div>
-<div class="theme-option">🟢 Matrix</div>
-</div></div>
-
-<script>
-function openSettings(){document.getElementById('settings-overlay').classList.add('show');}
-function closeSettings(){document.getElementById('settings-overlay').classList.remove('show');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();});
-document.addEventListener('click',e=>{if(e.target.id==='settings-overlay')closeSettings();});
-window.addEventListener('load',()=>{
- const b=document.querySelector('#theme-toggle button');
- if(b){b.onclick=openSettings;}
-});
-</script>
 </body>
 </html>
+
+
+
 
 
